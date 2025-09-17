@@ -1,36 +1,48 @@
 #include <stdio.h>
 
 int main() {
-    int tabuleiro[10][10]; // tabuleiro 10x10
-    int navioHorizontal[3] = {3, 3, 3}; // navio horizontal
-    int navioVertical[3]   = {3, 3, 3}; // navio vertical
+    int tabuleiro[10][10];
 
-    // Inicializa o tabuleiro com 0
+    // Inicializa tabuleiro com água (0)
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             tabuleiro[i][j] = 0;
         }
     }
 
-    // Coordenadas fixas dos navios
-    int linhaH = 2, colunaH = 4; // início do navio horizontal
-    int linhaV = 5, colunaV = 7; // início do navio vertical
-
-    // Posiciona navio horizontal (3 casas)
+    // ---- NAVIO HORIZONTAL ----
+    int linhaH = 2, colunaH = 4;
     if (colunaH + 3 <= 10) {
         for (int j = 0; j < 3; j++) {
-            tabuleiro[linhaH][colunaH + j] = navioHorizontal[j];
+            tabuleiro[linhaH][colunaH + j] = 3;
         }
     }
 
-    // Posiciona navio vertical (3 casas)
+    // ---- NAVIO VERTICAL ----
+    int linhaV = 5, colunaV = 7;
     if (linhaV + 3 <= 10) {
         for (int i = 0; i < 3; i++) {
-            tabuleiro[linhaV + i][colunaV] = navioVertical[i];
+            tabuleiro[linhaV + i][colunaV] = 3;
         }
     }
 
-    // Exibe o tabuleiro
+    // ---- NAVIO DIAGONAL DESCENDO ↘ ----
+    int linhaD1 = 0, colunaD1 = 0;
+    if (linhaD1 + 3 <= 10 && colunaD1 + 3 <= 10) {
+        for (int k = 0; k < 3; k++) {
+            tabuleiro[linhaD1 + k][colunaD1 + k] = 3;
+        }
+    }
+
+    // ---- NAVIO DIAGONAL SUBINDO ↗ ----
+    int linhaD2 = 9, colunaD2 = 0;
+    if (linhaD2 - 2 >= 0 && colunaD2 + 3 <= 10) {
+        for (int k = 0; k < 3; k++) {
+            tabuleiro[linhaD2 - k][colunaD2 + k] = 3;
+        }
+    }
+
+    // ---- MOSTRA TABULEIRO ----
     printf("\n--- Tabuleiro ---\n\n");
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
